@@ -1,0 +1,287 @@
+/* General Styles */
+/*body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #2c2929;
+    color: #333;
+    background-image: url('https://minibackground.com/wp-content/uploads/2020/01/Pivot-plaster.jpg');
+    background-size:150%; /* Ensure the background image covers the entire element
+    background-repeat: no-repeat; /* Prevent the background image from repeating
+    background-position: center;
+}
+
+header {
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-family: 'Merriweather', serif;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.chefs-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch; /* Ensure all items stretch to the same height 
+    gap: 2rem;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.chef-profile {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    max-width: 45%;
+    flex: 1 1 calc(50% - 2rem);
+    margin: 1rem;
+    transition: transform 1.5s ease-in-out, box-shadow 1.5s ease-in-out;
+    min-height: 350px; /* Set a minimum height for uniformity 
+}
+
+.chef-profile:hover {
+    animation: popUp 1.5s forwards; /* Trigger pop-up animation on hover 
+}
+
+.chef-photo {
+    width: 100%;
+}
+
+.chef-photo img {
+    width: 100%;
+    height: 450px; /* Set a specific height for the image 
+    object-fit: cover;  Ensures the image covers the div without stretching 
+    border-radius: 15px 15px 0 0;
+}
+
+.chef-info {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    flex: 1; /* Ensures the content area grows to fill the available space 
+}
+
+.chef-info h2 {
+    margin-top: 0;
+    font-size: 2rem;
+    color: #343a40;
+}
+
+.chef-info p {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Animations 
+@keyframes popUp {
+    0% {
+        transform: scale(1); /* Start at normal size 
+    }
+    50% {
+        transform: scale(1.05); /* Slightly larger 
+    }
+    100% {
+        transform: scale(1);  Return to normal size 
+    }
+}
+
+/* Responsive Design 
+@media (max-width: 768px) {
+    .chef-profile {
+        flex: 1 1 100%;
+    }
+    
+    .chef-photo img {
+        border-radius: 15px 15px 0 0;
+    }
+}
+
+/* Body Background with Animation */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, #1a1a1a, #3a0f25, #2c2c2c, #0f2027);
+    background-size: 400% 400%;
+    animation: bgMove 12s ease infinite;
+    color: #fff;
+}
+
+/* Background Animation */
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Header */
+header {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2rem;
+    text-align: center;
+    backdrop-filter: blur(6px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.header-content {
+    position: relative;
+}
+
+h1 {
+    font-size: 3rem;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.sub-heading {
+    color: #ccc;
+    margin-bottom: 1rem;
+}
+
+/* Home Button */
+.home-btn {
+    text-decoration: none;
+    color: white;
+    background: #ff9800;
+    padding: 10px 20px;
+    border-radius: 30px;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.home-btn:hover {
+    background: white;
+    color: black;
+    transform: scale(1.1);
+}
+
+/* Main Area */
+main {
+    padding: 2rem;
+}
+
+/* Container */
+.chefs-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+/* Card Style */
+.chef-profile {
+    width: 420px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    box-shadow: 0px 15px 30px rgba(0,0,0,0.6);
+}
+
+/* Floating Animation */
+.floating {
+    animation: floating 4s ease-in-out infinite;
+}
+
+.delay1 { animation-delay: 0.5s; }
+.delay2 { animation-delay: 1s; }
+.delay3 { animation-delay: 1.5s; }
+
+@keyframes floating {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0); }
+}
+
+/* Image Section */
+.chef-photo {
+    position: relative;
+}
+
+.chef-photo img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    transition: 0.6s ease;
+}
+
+/* Zoom Effect */
+.chef-profile:hover img {
+    transform: scale(1.12);
+}
+
+/* Overlay Text */
+.overlay {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    transform: translateY(100%);
+    transition: 0.5s ease;
+    font-size: 1.1rem;
+}
+
+/* Overlay Appear */
+.chef-profile:hover .overlay {
+    transform: translateY(0);
+}
+
+/* Text Area */
+.chef-info {
+    padding: 1.5rem;
+}
+
+.chef-info h2 {
+    color: #ffcc70;
+}
+
+.chef-info p {
+    color: #ddd;
+    line-height: 1.5;
+}
+
+/* Card Hover Glow */
+.chef-profile:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 20px 40px rgba(255, 200, 100, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .chef-profile {
+        width: 95%;
+    }
+
+    .home-btn {
+        position: static;
+        display: inline-block;
+        margin-top: 1rem;
+    }
+}

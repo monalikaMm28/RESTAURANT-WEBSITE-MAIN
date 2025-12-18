@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login or Sign Up</title>
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+</head>
+
+<style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  text-align: center;
+}
+
+input[type="text"],
+input[type="password"],
+button {
+  margin: 10px;
+  padding: 8px;
+  width: 200px;
+  display: block;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+}
+
+</style>
+
+
+
+<body>
+  <div class="login-container">
+    <h2>Login or Sign Up</h2>
+    <div id="login-form">
+      <input type="text" id="login-username" placeholder="Username">
+      <input type="password" id="login-password" placeholder="Password">
+      <button id="login-button">Login</button>
+    </div>
+    <div id="signup-form">
+      <input type="text" id="signup-username" placeholder="Username">
+      <input type="password" id="signup-password" placeholder="Password">
+      <button id="signup-button">Sign Up</button>
+    </div>
+    <p id="error-message" class="error"></p>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+  const loginForm = document.getElementById("login-form");
+  const signupForm = document.getElementById("signup-form");
+  const errorMessage = document.getElementById("error-message");
+
+  // Function to check if the user is already signed up
+  function isUserSignedUp(username) {
+    return localStorage.getItem(username) !== null;
+  }
+
+  // Function to handle sign up
+  function signUp(username, password) {
+    if (!isUserSignedUp(username)) {
+      localStorage.setItem(username, password);
+      alert("Sign up successful!");
+    } else {
+      errorMessage.innerText = "Username already exists";
+    }
+  }
+
+  // Function to handle login
+  function login(username, password) {
+    const storedPassword = localStorage.getItem(username);
+    if (storedPassword === password) {
+      alert("Login successful!");
+    } else {
+      errorMessage.innerText = "Invalid username or password";
+    }
+  }
+
+  // Event listener for login form submission
+  loginForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const username = document.getElementById("login-username").value;
+    const password = document.getElementById("login-password").value;
+    login(username, password);
+  });
+
+  // Event listener for sign up form submission
+  signupForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const username = document.getElementById("signup-username").value;
+    const password = document.getElementById("signup-password").value;
+    signUp(username, password);
+  });
+});
+
+  </script>
+</body>
+</html>

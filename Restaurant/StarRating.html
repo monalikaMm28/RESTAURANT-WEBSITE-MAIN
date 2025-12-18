@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Rating and Comments</title>
+  <link rel="stylesheet" href="RestaurantTableBooking.css">
+
+</head>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+  const stars = document.querySelectorAll(".star");
+  const ratingMsg = document.getElementById("rating-msg");
+  const commentInput = document.getElementById("comment");
+  const commentsList = document.getElementById("comments-list");
+  const submitButton = document.getElementById("submit-button");
+
+  stars.forEach(star => {
+    star.addEventListener("click", function() {
+      const rating = parseInt(star.getAttribute("data-value"));
+      stars.forEach(s => s.classList.remove("active"));
+      for (let i = 0; i < rating; i++) {
+        stars[i].classList.add("active");
+      }
+      ratingMsg.innerText = `You rated the restaurant ${rating} stars.`;
+      star.parentNode.setAttribute("data-rating", rating);
+    });
+  });
+
+    submitButton.addEventListener("click",()=>{
+    const comment = commentInput.value.trim();
+    const rating = parseInt(document.querySelector(".stars").getAttribute("data-rating"));
+    if (comment === "") {
+      alert("Please enter a comment.");
+      return;
+    }
+    const commentItem = document.createElement("div");
+    commentItem.innerHTML = `<strong>Rating:</strong> ${rating} stars<br><strong>Comment:</strong> ${comment}<hr>`;
+    commentsList.appendChild(commentItem);
+    commentInput.value = "";
+    stars.forEach(star => star.classList.remove("active"));
+    ratingMsg.innerText = `You rated the restaurant ${rating} stars.`;
+    alert("message submtted succesfully.");
+  });
+});
+</script>
+<body>
+    <div>
+  <h1 style="color:var(--gold-crayola);">Restaurant Rating and Comments</h1>
+  <br><br><br>
+
+  <div class="rating">
+    <h2 style="color:var(--gold-crayola);">Rate our restaurant:</h2>
+    <div class="stars" data-rating="0">
+      <span class="star" data-value="1">&#9733;</span>
+      <span class="star" data-value="2">&#9733;</span>
+      <span class="star" data-value="3">&#9733;</span>
+      <span class="star" data-value="4">&#9733;</span>
+      <span class="star" data-value="5">&#9733;</span>
+    </div>
+    <div id="rating-msg"></div>
+  </div>
+
+  <div class="comments">
+    <h2 style="color:var(--gold-crayola);">Leave a comment:</h2>
+    <br><br>
+    <textarea id="comment" rows="4" cols="50"></textarea><br>
+    <button id="submit-button">Submit</button>
+    <br><br>
+    <div id="comments-list" style="padding:50px;"></div>
+  </div>
+</div>
+</body>
+</html>

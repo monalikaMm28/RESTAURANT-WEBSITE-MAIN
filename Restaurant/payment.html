@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 60px;
+        }
+        .box {
+            border: 2px solid #ff914d;
+            display: inline-block;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        h1 {
+            color: #ff914d;
+        }
+        button {
+            padding: 10px 25px;
+            font-size: 18px;
+            background: #ff914d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Total Payment</h2>
+    <h1 id="amount">₹0</h1>
+
+    <br>
+    <button onclick="payNow()">Pay Now (Demo)</button>
+</div>
+
+<script>
+    // 1️⃣ URL se amount uthao
+    const params = new URLSearchParams(window.location.search);
+    const amount = params.get("amount");
+
+    // 2️⃣ Page par show karo
+    document.getElementById("amount").innerText = "₹" + amount;
+
+    // 3️⃣ Dummy payment
+    function payNow() {
+        alert("Payment Successful (Demo)");
+    }
+</script>
+
+</body>
+</html>

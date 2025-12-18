@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 
+    - primary meta tags
+  -->
+  <title>Restaurant Booking Website</title>
+  <meta name="title" content="Restaurant Booking Website">
+
+  <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
+
+  <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="RestaurantTableBooking.css">
+
+  <!-- 
+    - preload images
+  -->
+  <!-- <link rel="preload" as="image" href="/utube_1sst.jpg">
+  <link rel="preload" as="image" href="/utube_2nd.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-slider-3.jpg"> -->
+
+</head>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+const stars = document.querySelectorAll(".star");
+const ratingMsg = document.getElementById("rating-msg");
+const commentInput = document.getElementById("comment");
+const commentsList = document.getElementById("comments-list");
+const submitButton = document.getElementById("submit-button");
+
+stars.forEach(star => {
+  star.addEventListener("click", function() {
+    const rating = parseInt(star.getAttribute("data-value"));
+    stars.forEach(s => s.classList.remove("active"));
+    for (let i = 0; i < rating; i++) {
+      stars[i].classList.add("active");
+    }
+    ratingMsg.innerText = `You rated the restaurant ${rating} stars.`;
+    star.parentNode.setAttribute("data-rating", rating);
+  });
+});
+
+  submitButton.addEventListener("click",()=>{
+  const comment = commentInput.value.trim();
+  const rating = parseInt(document.querySelector(".stars").getAttribute("data-rating"));
+  if (comment === "") {
+    alert("Please enter a comment.");
+    return;
+  }
+  const commentItem = document.createElement("div");
+  commentItem.innerHTML = `<strong>Rating:</strong> ${rating} stars<br><strong>Comment:</strong> ${comment}<hr>`;
+  commentsList.appendChild(commentItem);
+  commentInput.value = "";
+  stars.forEach(star => star.classList.remove("active"));
+  ratingMsg.innerText = `You rated the restaurant ${rating} stars.`;
+  alert("message submtted succesfully.");
+});
+});
+</script>
+
+<body id="top">
+
+  
+
+  <!-- 
+    - #HEADER
+  -->
+
+  <!-- 
+    - #TOP BAR
+  -->
+
+  <div class="topbar">
+    <div class="box">
+
+      <address class="topbar-item">
+        <div class="icon">
+          <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+        </div>
+
+        <span class="span">
+          Dine Ease, Sector 49-B, Chandigarh, India
+        </span>
+      </address>
+
+      <div class="separator"></div>
+
+      <div class="topbar-item item-2">
+        <div class="icon">
+          <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+        </div>
+
+        <span class="span">Daily - 7:00 am to 12:00 pm</span>
+      </div>
+
+      <a href="tel:+11234567890" class="topbar-item link">
+        <div class="icon">
+          <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+        </div>
+
+        <span class="span">+91 123 456 7890</span>
+      </a>
+
+      <div class="separator"></div>
+
+      <a href="mailto:booking@restaurant.com" class="topbar-item link">
+        <div class="icon">
+          <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+        </div>
+
+        <span class="span">booking@dineease.com</span>
+      </a>
+
+    </div>
+  </div>
+
+  <header class="header" data-header>
+    <div class="container">
+
+      <a href="#" class="logo">
+        <br>
+        <img src="data:image/jpeg;base64,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" height="100" width="100" alt="Restaurant-logo">
+      </a>
+
+      <nav class="navbar" data-navbar>
+
+        <button class="close-btn" aria-label="close menu" data-nav-toggler>
+          <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+        </button>
+
+        <a href="#" class="logo">
+          <img src="/Images2/logo.png" alt="Restaurant-logo">
+        </a>
+
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <a href="#home" class="navbar-link hover-underline active">
+              <div class="separator"></div>
+
+              <span class="span">Home</span>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="#starrating" class="navbar-link hover-underline">
+              <div class="separator"></div>
+
+              <span class="span">Reviews</span>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="/Restaurant/aboutus.html" class="navbar-link hover-underline">
+              <div class="separator"></div>
+
+              <span class="span">About Us</span>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="/Restaurant/OurChefs.html" class="navbar-link hover-underline">
+              <div class="separator"></div>
+
+              <span class="span">Our Chefs</span>
+            </a>
+          </li>
+
+          <!-- <li class="navbar-item">
+            <a href="#" class="navbar-link hover-underline">
+              <div class="separator"></div>
+
+              <span class="span">Contact Us</span>
+            </a>
+          </li> -->
+
+          <li class="navbar-item">
+            <a href="#map" class="navbar-link hover-underline">
+              <div class="separator"></div>
+
+              <span class="span">Find Us</span>
+            </a>
+          </li>
+
+        </ul>
+
+      </nav>
+
+      <a href="Login.html" class="btn btn-secondary">
+       <span class="text text-1" id="userArea">Login</span>
+
+        <!--<span class="text text-1"  height="5px" width="5px" >Login</span>-->
+
+      <button class="text text-2" type="button" id="userBtn" aria-hidden="true">L O G I N</button>
+
+      </a>
+
+      <div class="overlay" data-nav-toggler data-overlay></div>
+
+    </div>
+  </header>
+
+
+
+
+
+  <main>
+    <article>
+
+      <!-- 
+        - #HERO
+      -->
+
+      <section class="hero text-center" aria-label="home" id="home">
+
+        <ul class="hero-slider" data-hero-slider>
+
+          <li class="slider-item active" data-hero-slider-item>
+
+            <div class="slider-bg">
+              <img src="/Images2/Hero-bg.jpg" width="1880" height="950" alt="" class="img-cover">
+            </div>
+
+            <p class="label-2 section-subtitle slider-reveal">Traditional & Hygienic</p>
+
+            <h1 class="display-1 hero-title slider-reveal">
+              For the love of <br>
+              delicious food
+            </h1>
+
+            <p class="body-2 hero-text slider-reveal">
+              Come with family & feel the joy of mouthwatering food
+            </p>
+
+            <a href="Menu.html" class="btn btn-primary slider-reveal">
+              <span class="text text-1">View Our Menu</span>
+
+              <span class="text text-2" aria-hidden="true">View Our Menu</span>
+            </a>
+
+          </li>
+        </ul>
+
+        <a href="Reservation.html" class="hero-btn has-after">
+          <img src="/Images2/BookATable.png" width="48" height="48" alt="booking icon">
+          <button class="label-2 text-center span" type="submit" aria-hidden="true" height="5px" width="5px">Book A Table</button>
+          <!-- <span class="label-2 text-center span">Book A Table</span> -->
+        </a>
+
+        </section>
+    </article>
+
+
+
+
+
+
+<!--     2nd page -->
+
+<section class="background1">
+      <div class="flavours"  style="display: flex; height:20vh; justify-content: center; color:hsl(38, 61%, 73%); align-items: flex-end;">
+        Fresh flavours, vibrant ambience
+    </div>
+
+    <div class="photo" style=" margin-left:45vw; display: flex; justify-content: center;">
+        <img src = "/Images2/seperator.png">
+    </div>
+
+    <div class="Top" style="font-size: 2.2em;">
+      EXPLORE OUR AMBIENCE
+  </div>
+
+
+      <section class="section-slider">
+          <div class="newcontainer">
+              <div class="slide-container">
+                  <div class="slide-image">
+                      <img id="image" src="/Images2/Ambiance/ambience-1.jpeg">
+                  </div>
+                  <div class="slide-image">
+                      <img id="image" src="/Images2/Ambiance/ambience-2.jpeg">
+                  </div>
+                  <div class="slide-image">
+                      <img id="image" src="/Images2/Ambiance/ambience-3.jpeg">
+                  </div>
+                  <div class="slide-image">
+                      <img id="image" src="/Images2/Ambiance/ambience-4.jpg">
+                  </div>
+                  <!-- <div class="slide-image">
+                    <img id="image" src="/Images/ambience-5.webp">
+                  </div> -->
+                  <div class="slide-image">
+                    <img id="image" src="/Images2/Ambiance/ambience-9.webp">
+                  </div>
+                  <div class="slide-image">
+                      <img id="image" src="/Images2/Ambiance/ambience-7.jpeg">
+                  </div>
+                  <div class="slide-image">
+                      <img id="image" src="/Images2/Ambiance/ambience-8.jpeg">
+                  </div>
+                  <div class="slide-image">
+                    <img id="image" src="/Images2/Ambiance/ambience-6.jpeg">
+                  </div>
+                  <div class="slide-image">
+                      <img id="image" src="/Images2/Ambiance/ambience-10.webp">
+                  </div>
+  
+              </div>
+            </div>
+          </div>
+  
+      </section>
+    </section>
+
+
+
+  
+
+
+      
+
+
+
+<!-- TOP NOTCH -->
+<div class="Body">
+    <div class="flavours">
+        Flavours for royalty
+    </div>
+
+    <div class="photo" >
+        <img src = "/Images2/seperator.png">
+    </div>
+
+    <div class="Top">
+        <br>WE OFFER TOP NOTCH<br><br><br>
+        <span  class="body-2 hero-text">
+          Experience the warmth of comfort food like never before. <br>Our chef's innovative twists on classics will transport you to a world <br>where every bite feels like a hug for your taste buds
+        </span>
+    </div>
+    <div class="Container">
+        <div class="box">
+          <a href="Menu.html#breakfast">
+            <div class="imgBx">
+                <img src = "/Images2/service-1.jpg">
+            </div>
+            <div class="content">
+                <div>
+                    <h2>Breakfast</h2>   
+                </div>
+            </div>
+          </a>
+        </div>
+        <div class="box">
+          <a href="Menu.html#snacks">
+            <div class="imgBx">
+                <img src = "/Images2/service-2.jpg">
+            </div>
+            <div class="content">
+                <div>
+                    <h2>Snacks</h2>
+                </div>
+            </div>
+          </a>
+        </div>
+        <div class="box">
+          <a href="Menu.html#maincourse">
+            <div class="imgBx">
+                <img src = "/Images2/service-3.jpg">
+            </div>
+            <div class="content">
+                <div>
+                    <h2>Main Course</h2> 
+                </div>
+            </div>
+          </a>
+        </div>
+
+</div>
+
+</div>
+
+
+<!-- 
+        - #MENU
+      -->
+
+      <section class="section menu" aria-label="menu-label" id="menu">
+        <div class="ccontainer">
+          <div class="flavours"  style="display: flex; height:20vh; justify-content: center; color:hsl(38, 61%, 73%); align-items: flex-end;">
+            Special Selection
+        </div>
+    
+        <div class="photo" style=" margin-left:45vw; display: flex; justify-content: center;">
+            <img src = "/Images2/seperator.png">
+        </div>
+        <p class="Top" style="font-weight:500; font-size:2.5em;">DELICIOUS MENU</p>
+          <div class="Combined">
+          <div class="div-1">
+          <ul class="grid-list">
+
+            <li>
+              <div class="menu-card hover:card">
+
+                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                  <img src="/Images2/Breakfast/chole_bhature.jpeg" width="100" height="100" loading="lazy" alt="Bhature-chole"
+                    class="img-cover" style="border-radius:20px;">
+                </figure>
+
+                <div>
+
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="#" class="card-title" onclick="addToCart('Chole Bhature', 120)">Chole Bhature</a>
+                    </h3>
+
+                    <!-- <span class="badge label-1">Seasonal</span> -->
+
+                    <span class="span title-2">Rs. 120</span>
+                  </div>
+
+                  <p class="card-text label-1">
+                    A culinary journey worth savoring with every delicious bite!
+                  </p>
+
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="menu-card hover:card">
+
+                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                  <img src="/Images2/snacks/PaneerTikka.jpeg" width="100" height="100" loading="lazy" alt="Paneer Tikka"
+                    class="img-cover" style="border-radius:20px;">
+                </figure>
+
+                <div>
+
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="#" class="card-title" onclick="addToCart('Paneer Tikka', 260)">Paneer Tikka</a>
+                    </h3>
+
+                    <span class="badge label-1">New</span>
+
+                    <span class="span title-2">Rs. 260</span>
+                  </div>
+
+                  <p class="card-text label-1">
+                    A flavor-packed sensation that'll leave you craving more!
+                  </p>
+
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="menu-card hover:card">
+
+                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                  <img src="/Images2/snacks/Pizza.jpeg" width="100" height="100" loading="lazy" alt="Pizza"
+                    class="img-cover" style="border-radius:20px;">
+                </figure>
+
+                <div>
+
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="#" class="card-title" onclick="addToCart('Pizza', 180)">Pizza</a>
+                    </h3>
+
+                    <span class="span title-2">Rs. 180</span>
+                  </div>
+
+                  <p class="card-text label-1">
+                    Get ready to embark on a flavor adventure with our Pizza!
+                  </p>
+
+                </div>
+
+              </div>
+            </li>
+            </ul>
+            </div>
+
+
+            <div class="div-2">
+            <ul class="grid-list">
+
+              <li>
+                <div class="menu-card hover:card">
+  
+                  <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                    <img src="/Images2/Maincourse/KadhaiPaneer.jpeg" width="100" height="100" loading="lazy" alt="Kadhai Paneer"
+                      class="img-cover" style="border-radius:20px;">
+                  </figure>
+  
+                  <div>
+  
+                    <div class="title-wrapper">
+                      <h3 class="title-3">
+                        <a href="#" class="card-title" onclick="addToCart('Kadhai Paneer', 280)">Kadhai Paneer</a>
+                      </h3>
+  
+                      <span class="span title-2">Rs. 280</span>
+                    </div>
+  
+                    <p class="card-text label-1">
+                      A culinary masterpiece that'll leave you wanting an encore!
+                    </p>
+  
+                  </div>
+  
+                </div>
+              </li>
+
+              <li>
+                <div class="menu-card hover:card">
+  
+                  <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                    <img src="/Images2/Maincourse/Rajmachawal.jpeg" width="100" height="100" loading="lazy" alt="Rajma Chawal"
+                      class="img-cover" style="border-radius:20px;">
+                  </figure>
+  
+                  <div>
+  
+                    <div class="title-wrapper">
+                      <h3 class="title-3">
+                        <a href="#" class="card-title" onclick="addToCart('Rajma Chawal', 230)">Rajma Chawal</a>
+                      </h3>
+  
+                      <span class="badge label-1">New</span>
+  
+                      <span class="span title-2">Rs. 230</span>
+                    </div>
+  
+                    <p class="card-text label-1">
+                      A comforting classic that'll warm your soul with every bite!
+                    </p>
+  
+                  </div>
+  
+                </div>
+              </li>
+
+              <li>
+                <div class="menu-card hover:card">
+  
+                  <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                    <img src="/Images2/snacks/Pasta.jpeg" width="100" height="100" loading="lazy" alt="Pasta"
+                      class="img-cover" style="border-radius:20px;">
+                  </figure>
+  
+                  <div>
+  
+                    <div class="title-wrapper">
+                      <h3 class="title-3">
+                        <a href="#" class="card-title" onclick="addToCart('Pasta', 130)">Pasta</a>
+                      </h3>
+  
+                      <span class="span title-2">Rs. 130</span>
+                    </div>
+  
+                    <p class="card-text label-1">
+                      A taste of Italy that'll have you saying "molto delizioso" with every bite!
+                    </p>
+  
+                  </div>
+  
+                </div>
+              </li>
+
+          </ul>
+          </div>
+        </div>
+
+          <p class="menu-text text-center">
+            During winter daily from <span class="span">7:00 pm</span> to <span class="span">9:00 pm</span>
+          </p>
+
+          <a href="./Menu.html" class="btn btn-primary">
+            <span class="text text-1">View All Menu</span>
+
+            <span class="text text-2" aria-hidden="true">View All Menu</span>
+          </a>
+
+        </div>
+      </section>
+
+      <section id="starrating">
+        <div class="Picture" style="width:97vw;margin-top: 55px;height: 100vh;">
+          <div style="height: 90%;width: 80%;margin-right:10vw;">
+            <img src="/Images2/RATING.jpeg" style="height: 100%;width: 100%;">
+          </div>
+          <!-- <h1 style="color:var(--gold-crayola);">Restaurant Rating and Comments</h1> -->
+          <!-- <br><br><br> -->
+        <div style="width:60%;height:100%;margin-right:5vw;">
+          <div class="rating">
+            <h2 class="Top" style="font-weight:500; font-size:1.35em;">YOUR  FEEDBACK  MATTERS !!</h2>
+            <div class="photo" style="margin-left:170px;" >
+              <img src = "/Images2/seperator.png" height="80px"width="130px">
+          </div>
+            <br><p style="font-family:Georgia, 'Times New Roman', Times, serif;font-style: italic;font-size:1.3em;">Rate our Restaurant</p>
+            <div class="stars" data-rating="0">
+              <span class="star" data-value="1">&#9733;</span>
+              <span class="star" data-value="2">&#9733;</span>
+              <span class="star" data-value="3">&#9733;</span>
+              <span class="star" data-value="4">&#9733;</span>
+              <span class="star" data-value="5">&#9733;</span>
+            </div>
+            <div id="rating-msg"></div>
+          </div>
+        
+          <div class="comments">
+            <p style="color:var(--gold-crayola);font-size:x-large;font-family:Georgia, 'Times New Roman', Times, serif;font-style: italic;color: hsl(38, 61%, 73%);">Tell us about your experience with us:</p>
+            <br><br>
+            <textarea id="comment" rows="4" cols="50"></textarea><br>
+            <button id="submit-button" class="btn btn-secondary">Submit</button>
+            <br><br>
+            <div id="comments-list"  style="border:1px solid var(--gold-crayola); padding:10px;"></div>
+          </div>
+        </div>
+        </div>
+      </section>
+
+
+      
+       <!-- 
+      FOOTER -->
+
+      <div class="footer">
+        <div class="col-1">
+            
+                <a href="#home">HOME</a><br>
+                <a href="#menu">MENUS</a><br>
+                <a href="aboutus.html">ABOUT US</a><br>
+                <a href="OurChefs.html">OUR CHEFS</a><br>
+                <a href="#">CONTACT US</a><br>
+            
+        </div>
+
+        <div class="col-2">
+
+            <div><h2>DINE-EASE<br><br></div>
+              <div><img src ="/Images2/seperator.png" width="100px"></h2></div><br><br>
+                sector 49-B,Chandigarh,India <br>
+                booking@dineease.com<br>
+                Booking Request : +91-123-123456<br>
+                Open - 07:00 am - 12:00 pm<br><br><br>
+                <img src ="/Images2/seperator.png" width="100px"> <br><br><br>
+            <h3>Get News & Offers<br>
+                Subscribe & get 25% off on your first visit.<h3>
+            <form> 
+                <input type="email" placeholder=" Your Email" required>
+                <div style="display: flex; width: 100%; justify-content: center;">
+                <a href="#" class="btn btn-secondary">
+                  <span class="text text-1">Subscribe</span>
+          
+                  <span class="text text-2" aria-hidden="true">Subscribe</span>
+                  
+                </a></div><br><br>
+                <div id="map">
+                  <p><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d219502.69172339264!2d76.5000845!3d30.7260024!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fed21ac20da79%3A0xbe56a1812c7d4c04!2sBarbeque%20Nation%20-%20Chandigarh%20-%20Sector%2026!5e0!3m2!1sen!2sin!4v1714710348485!5m2!1sen!2sin" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+            </div>
+            </form>
+        </div>
+        <div class="col-3">
+            <ul>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <br>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <br>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <br>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <br>
+                <a href="#map"><i class="fa-brands fa-google maps"></i></a>
+                
+            </ul>
+        </div>
+    </div>
+
+    <div>
+    </a></div>
+    </div>
+
+
+  
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="https://kit.fontawesome.com/dd7dff7588.js" crossorigin="anonymous"></script>
+  <script>
+window.onload = function () {
+    let user = localStorage.getItem("username");
+
+    if (user) {
+        document.getElementById("userArea").innerText = "Hello " + user;
+        document.getElementById("userBtn").innerText = "Hello " + user;
+        document.getElementById("loginLink").href = "#";
+    }
+};
+</script>
+
+
+
+<script>
+  // ⭐ localStorage se username fetch karo
+  const username = localStorage.getItem("username");
+
+  if(loggedUser){
+    document.getElementById("usernameDisplay").innerText = loggedUser;
+  } else {
+    document.getElementById("usernameDisplay").innerText = "Guest";
+  }
+</script>
+
+
+<script>
+        // DOM fully loaded hone ke baad run karo
+        document.addEventListener("DOMContentLoaded", function() {
+            const loggedUser = localStorage.getItem("loggedUser");
+            if(loggedUser) {
+                document.getElementById("usernameDisplay").innerText = loggedUser;
+            } else {
+                document.getElementById("usernameDisplay").innerText = "Guest";
+            }
+        });
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>

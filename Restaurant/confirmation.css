@@ -1,0 +1,22 @@
+.confirm-home-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #ffcf71, #ff914d);
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: 0.3s ease;
+    border: 2px solid white;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
+}
+
+.confirm-home-btn:hover {
+    background: white;
+    color: #ff914d;
+    border-color: #ff914d;
+    transform: scale(1.07);
+    box-shadow: 0px 6px 18px rgba(0,0,0,0.35);
+}

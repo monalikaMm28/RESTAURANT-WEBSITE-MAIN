@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reservation Confirmed</title>
+
+<style>
+
+    /* Full Screen Background */
+    .reserved {
+        background-image: url('/Images2/ReservedFEE.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-shadow: 0px 3px 8px rgba(0, 0, 0, 0.7);
+        text-align: center;
+        padding: 20px;
+    }
+
+    .reserved h1 {
+        font-size: 48px;
+        margin-bottom: 10px;
+    }
+
+    .reserved p {
+        font-size: 22px;
+        margin-top: 5px;
+    }
+
+    /* BEAUTIFUL HOME BUTTON - TOP LEFT */
+    .confirm-home-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+
+        display: inline-block;
+        padding: 12px 30px;
+        background: linear-gradient(135deg, #ffcf71, #ff914d);
+        color: #000;
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: 0.3s ease;
+        border: 2px solid white;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+    }
+
+    .confirm-home-btn:hover {
+        background: white;
+        color: #ff914d;
+        border-color: #ff914d;
+        transform: scale(1.07);
+        box-shadow: 0px 6px 18px rgba(0,0,0,0.35);
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HOME BUTTON -->
+<a href="index.html" class="confirm-home-btn">🏠 Back to Home</a>
+
+<!-- MAIN SUCCESS SECTION -->
+<div class="reserved">
+    <h1>Reservation Confirmed</h1>
+    <p>Your table has been successfully booked.</p>
+    <p>A mail has been sent to your registered email ID.</p>
+</div>
+
+</body>
+</html>

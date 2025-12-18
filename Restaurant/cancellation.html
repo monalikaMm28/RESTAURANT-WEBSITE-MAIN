@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cancel Booking</title>
+</head>
+<body>
+
+<h2 id="msg">Cancelling your booking...</h2>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+const bookingId = params.get("booking_id");
+const time = params.get("time");
+const email = params.get("email");
+
+// Save cancellation (JS-only demo)
+localStorage.setItem("booking_" + bookingId, "Cancelled");
+
+// Show confirmation
+document.getElementById("msg").innerHTML =
+  `Booking <b>#${bookingId}</b> scheduled at ${time} has been cancelled successfully.`;
+</script>
+
+</body>
+</html>

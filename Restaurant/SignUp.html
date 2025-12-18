@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="Login.css">
+  <title>SIGN UP</title>
+
+  <style>
+    /* REMOVE number input arrows */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] {
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+  </style>
+</head>
+
+<body>
+<section style="background-image: url('/Images2/login-bg.png');">
+    <div class="form-box" style="height:630px;">
+        <div class="form-value">
+            <form id="signupForm">
+
+                <h2>SIGN UP</h2>
+
+                <!-- NAME -->
+                <div class="inputbox">
+                    <input type="text" id="name" required>
+                    <label class="email">Name</label>
+                </div>
+
+                <!-- PHONE -->
+                <div class="inputbox">
+                    <input type="number" id="phone" required>
+                    <label class="email">Phone Number</label>
+                </div>
+
+                <!-- EMAIL -->
+                <div class="inputbox">
+                    <input type="email" id="email" required>
+                    <label class="email">Email</label>
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="inputbox">
+                    <input type="password" id="password" required>
+                    <label>Set Password</label>
+                </div>
+
+                <!-- CONFIRM PASSWORD -->
+                <div class="inputbox">
+                    <input type="password" id="confirmPassword" required>
+                    <label>Confirm Password</label>
+                </div>
+
+                <!-- SIGN UP BUTTON -->
+                <button type="submit" style="background:#fff; color:#000; font-weight:bold;">
+                    Sign Up
+                </button>
+
+                <div class="register">
+                    <p>Already have an account? <a href="Login.html">LOGIN</a></p>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+document.getElementById("signupForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let name = document.getElementById("name").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let pass = document.getElementById("password").value;
+    let confirmPass = document.getElementById("confirmPassword").value;
+
+    // PHONE VALIDATION (10 digits)
+    if (phone.length !== 10 || !/^\d{10}$/.test(phone)) {
+        alert("Please enter a valid 10-digit phone number.");
+        return;
+    }
+
+    // EMAIL VALIDATION
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+    // PASSWORD MATCH CHECK
+    if (pass !== confirmPass) {
+        alert("Passwords do not match.");
+        return;
+    }
+
+    // ⭐ SAVE USERNAME SAME AS LOGIN PAGE USES ⭐
+    localStorage.setItem("username", name);
+    localStorage.setItem("userEmail", email);       
+    localStorage.setItem("userPassword", pass);  
+
+    alert("Sign Up Successful!");
+
+    // REDIRECT TO HOME
+    window.location.href = "index.html";
+});
+</script>
+
+
+

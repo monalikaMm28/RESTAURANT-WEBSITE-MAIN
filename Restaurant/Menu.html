@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="RestaurantTableBooking.css">
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+    <title>Document</title>
+</head>
+<style>
+  /* Styles for the modal */
+  .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.4);
+      padding-top: 60px;
+  }
+
+ .modal-content {
+    background-color: #fff; /* already white */
+    color: #000;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 450px; /* responsive */
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+#paymentBox button:hover {
+    background-color: #ff6f00;
+}
+
+#cart-count {
+    background: #ff914d;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 14px;
+    position: relative;
+    top: -10px;
+    right: 10px;
+}
+
+  
+
+  .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+  }
+
+  table {
+      width: 100%;
+      border-collapse: collapse;
+  }
+
+  table, th, td {
+      border: 1px solid black;
+  }
+
+  th, td {
+      padding: 8px;
+      text-align: left;
+  }
+
+  th {
+      background-color: #f2f2f2;
+  }
+</style>
+<body>
+
+
+  <header class="header" data-header style="position:fixed;background-color:var(--eerie-black-2);padding-block:0px;">
+    <div class="container">
+
+      <a href="#" class="logo">
+        <img src="/Images2/logo.png" height="1000" width="170" alt="Restaurant-logo">
+      </a>
+
+      <nav class="navbar" data-navbar>
+
+        <button class="close-btn" aria-label="close menu" data-nav-toggler>
+          <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+        </button>
+
+        <a href="#" class="logo">
+          <img src="/Images2/logo.png" alt="Restaurant-logo">
+        </a>
+
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <a href="index.html#home" class="navbar-link hover-underline active">
+              <div class="separator"></div>
+
+              <span class="span">Home</span>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="index.html#starrating" class="navbar-link hover-underline">
+              <div class="separator"></div>
+
+              <span class="span">Reviews</span>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="aboutus.html" class="navbar-link hover-underline">
+              <div class="separator"></div>
+
+              <span class="span">About Us</span>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="OurChefs.html" class="navbar-link hover-underline">
+              <div class="separator"></div>
+
+              <span class="span">Our Chefs</span>
+            </a>
+          </li>
+
+          <!-- <li class="navbar-item">
+            <a href="#" class="navbar-link hover-underline">
+              <div class="separator"></div>
+
+              <span class="span">Contact Us</span>
+            </a>
+          </li> -->
+
+          <li class="navbar-item">
+            <a href="#map" class="navbar-link hover-underline">
+              <div class="separator"></div>
+
+              <span class="span">Find Us</span>
+            </a>
+          </li>
+
+        </ul>
+
+      </nav>
+
+      <a href="#" class="cart-icon" onclick="showInvoice()">
+        <ion-icon class="bagicon" name="bag-check-outline"></ion-icon>
+        <span id="cart-count">0</span>
+    </a>
+
+      <div class="overlay" data-nav-toggler data-overlay></div>
+
+    </div>
+  </header>
+
+
+  <!-- <br><br><br> -->
+
+
+
+    <section class="section menu" aria-label="menu-label" id="menu">
+        <div class="ccontainer" id ="breakfast" style="background-image: url('/Images2/form-pattern.png');">
+
+
+
+
+        <div class="flavours"  style="display: flex; height:20vh; justify-content: center; color:hsl(38, 61%, 73%); align-items: flex-end;font-size:2.5em">
+            Delicious Menu
+        </div>
+
+
+    
+        <div class="photo" style=" margin-left:45vw; display: flex; justify-content: center;">
+            <img src = "/Images2/seperator.png">
+        </div>
+
+
+
+        <p class="Top" style="font-weight:500; font-size:2.5em;">BREAKFAST</p>
+
+
+
+
+
+        <!-- BREAKFAST SECTION -->
+
+
+
+
+
+
+        <div class="Combined">
+
+
+            <!-- <div class="breakfast"> -->
+                <!-- <p class="Top" style="font-weight:500; font-size:2.5em;">DELICIOUS MENU</p> -->
+
+          <div class="div-1">
+          <ul class="grid-list">
+
+            <li>
+              <div class="menu-card hover:card">
+
+                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                  <img src="/Images2/Breakfast/chole_bhature.jpeg" width="100" height="100" loading="lazy" alt="Bhature-chole"
+                    class="img-cover" style="border-radius:20px;">
+                </figure>
+
+                <div>
+
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="#" class="card-title" onclick="addToCart('Chole Bhature', 120)">Chole Bhature</a>
+                    </h3>
+
+                    <!-- <span class="badge label-1">Seasonal</span> -->
+
+                    <span class="span title-2">Rs. 120</span>
+                  </div>
+
+                  <p class="card-text label-1">
+                    A culinary journey worth savoring with every delicious bite!
+                  </p>
+
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="menu-card hover:card">
+
+                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                  <img src="/Images2/Breakfast/masala_dosa.jpeg" width="100" height="100" loading="lazy" alt="Masala Dosa"
+                    class="img-cover" style="border-radius:20px;">
+                </figure>
+
+                <div>
+
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="#" class="card-title" onclick="addToCart('Masala Dosa', 170)">Masala Dosa</a>
+                    </h3>
+
+                    <span class="span title-2">Rs. 170</span>
+                  </div>
+
+                  <p class="card-text label-1">
+                    A crunchy, flavorful delight that'll have you craving another bite before you've even finished the first!
+                  </p>
+
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="menu-card hover:card">
+
+                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                  <img src="/Images2/Breakfast/upma.jpeg" width="100" height="100" loading="lazy" alt="Upma"
+                    class="img-cover" style="border-radius:20px;">
+                </figure>
+
+                <div>
+
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="#" class="card-title" onclick="addToCart('Upma', 130)">Upma</a>
+                    </h3>
+
+                    <span class="span title-2">Rs. 130</span>
+                  </div>
+
+                  <p class="card-text label-1">
+                    A wholesome and flavorful breakfast that'll leave you feeling satisfied and ready to take on the day!
+                  </p>
+
+                </div>
+
+              </div>
+            </li>
+            </ul>
+            </div>
+
+
+
+
+            <div class="div-2">
+            <ul class="grid-list">
+
+            <li>
+              <div class="menu-card hover:card">
+
+                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                  <img src="/Images2/Breakfast/aloo_pronthe.jpeg" width="100" height="100" loading="lazy" alt="Aloo Prantha"
+                    class="img-cover" style="border-radius:20px;">
+                </figure>
+
+                <div>
+
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="#" class="card-title" onclick="addToCart('Aloo Prantha', 70)">Aloo Prantha</a>
+                    </h3>
+
+                    <span class="badge label-1">New</span>
+
+                    <span class="span title-2">Rs. 70</span>
+                  </div>
+
+                  <p class="card-text label-1">
+                    A flavor-packed culinary delight that'll make your taste buds sing with joy!
+                  </p>
+
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="menu-card hover:card">
+
+                <figure class="card-banner img-holder" style="--width: 100; --height: 50;">
+                  <img src="/Images2/Breakfast/Poha.jpeg" width="100" height="50" loading="lazy" alt="Poha"
+                    class="img-cover" style="border-radius:20px;">
+                </figure>
+
+                <div>
+
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="#" class="card-title" onclick="addToCart('Poha', 120)">Poha</a>
+                    </h3>
+
+                    <span class="span title-2">Rs. 120</span>
+                  </div>
+
+                  <p class="card-text label-1">
+                    Avocados with crab meat, red onion, crab salad stuffed red bell pepper and green bell pepper.
+                  </p>
+
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="menu-card hover:card">
+
+                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                  <img src="/Images2/Breakfast/idli_sambhar.jpeg" width="100" height="100" loading="lazy" alt="Idli sambhar"
+                    class="img-cover" style="border-radius:20px;">
+                </figure>
+
+                <div>
+
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="#" class="card-title" onclick="addToCart('Idli Sambhar', 150)">Idli Sambhar</a>
+                    </h3>
+
+                    <span class="span title-2">Rs. 150</span>
+                  </div>
+
+                  <p class="card-text label-1">
+                    A South Indian delight that'll transport your taste buds to a culinary paradise with every bite!
+                  </p>
+
+                </div>
+
+              </div>
+            </li>
+          </ul>
+        </div>
+          <!-- </div> -->
+        </div>
+
+        </div>
+
+
+
+
+
+        <!-- SNACKS SECTION -->
+
+
+
+
+
+
+        <div class="ccontainer" id="snacks"  style="background-image: url('/Images2/form-pattern.png');">
+
+
+
+            <p class="Top" style="font-weight:500; font-size:2.5em;">SNACKS</p> 
+            
+    
+        
+            
+    
+    
+            <div class="Combined">
+    
+    
+                <!-- <div class="breakfast"> -->
+                    <!-- <p class="Top" style="font-weight:500; font-size:2.5em;">DELICIOUS MENU</p> -->
+    
+              <div class="div-1">
+              <ul class="grid-list">
+    
+                <li>
+                  <div class="menu-card hover:card">
+    
+                    <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                      <img src="/Images2/snacks/Momos.jpeg" width="100" height="100" loading="lazy" alt="Momos"
+                        class="img-cover" style="border-radius:20px;">
+                    </figure>
+    
+                    <div>
+    
+                      <div class="title-wrapper">
+                        <h3 class="title-3">
+                          <a href="#" class="card-title" onclick="addToCart('Momos', 140)">Momos</a>
+                        </h3>
+    
+                        <!-- <span class="badge label-1">Seasonal</span> -->
+    
+                        <span class="span title-2">Rs. 140</span>
+                      </div>
+    
+                      <p class="card-text label-1">
+                        Delicate pockets of joy, filled with a delicious blend of seasoned vegetables!
+                      </p>
+    
+                    </div>
+    
+                  </div>
+                </li>
+    
+                <li>
+                  <div class="menu-card hover:card">
+    
+                    <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                      <img src="/Images2/snacks/Pasta.jpeg" width="100" height="100" loading="lazy" alt="Pasta"
+                        class="img-cover" style="border-radius:20px;">
+                    </figure>
+    
+                    <div>
+    
+                      <div class="title-wrapper">
+                        <h3 class="title-3">
+                          <a href="#" class="card-title" onclick="addToCart('Pasta', 130)">Pasta</a>
+                        </h3>
+    
+                        <span class="span title-2">Rs. 130</span>
+                      </div>
+    
+                      <p class="card-text label-1">
+                        A taste of Italy that'll have you saying "molto delizioso" with every bite!
+                      </p>
+    
+                    </div>
+    
+                  </div>
+                </li>
+    
+                <li>
+                  <div class="menu-card hover:card">
+    
+                    <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                      <img src="/Images2/snacks/PavBhaji.jpeg" width="100" height="100" loading="lazy" alt="Pav Bhaji"
+                        class="img-cover" style="border-radius:20px;">
+                    </figure>
+    
+                    <div>
+    
+                      <div class="title-wrapper">
+                        <h3 class="title-3">
+                          <a href="#" class="card-title" onclick="addToCart('Pav Bhaji', 140)">Pav Bhaji</a>
+                        </h3>
+    
+                        <span class="span title-2">Rs. 140</span>
+                      </div>
+    
+                      <p class="card-text label-1">
+                        A flavor-packed street food sensation that'll have you hooked from the first bite!
+                      </p>
+    
+                    </div>
+    
+                  </div>
+                </li>
+                </ul>
+                </div>
+    
+    
+                <div class="div-2">
+                <ul class="grid-list">
+    
+                <li>
+                  <div class="menu-card hover:card">
+    
+                    <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                      <img src="/Images2/snacks/PaneerTikka.jpeg" width="100" height="100" loading="lazy" alt="Paneer Tikka"
+                        class="img-cover" style="border-radius:20px;">
+                    </figure>
+    
+                    <div>
+    
+                      <div class="title-wrapper">
+                        <h3 class="title-3">
+                          <a href="#" class="card-title" onclick="addToCart('Paneer Tikka', 260)">Paneer Tikka</a>
+                        </h3>
+    
+                        <span class="badge label-1">New</span>
+    
+                        <span class="span title-2">Rs. 260</span>
+                      </div>
+    
+                      <p class="card-text label-1">
+                        A flavor-packed sensation that'll leave you craving more!
+                      </p>
+    
+                    </div>
+    
+                  </div>
+                </li>
+    
+                <li>
+                  <div class="menu-card hover:card">
+    
+                    <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                      <img src="/Images2/snacks/Pizza.jpeg" width="100" height="100" loading="lazy" alt="Pizza"
+                        class="img-cover" style="border-radius:20px;">
+                    </figure>
+    
+                    <div>
+    
+                      <div class="title-wrapper">
+                        <h3 class="title-3">
+                          <a href="#" class="card-title" onclick="addToCart('Pizza', 180)">Pizza</a>
+                        </h3>
+    
+                        <span class="span title-2">Rs. 180</span>
+                      </div>
+    
+                      <p class="card-text label-1">
+                        Get ready to embark on a flavor adventure with our Pizza!
+                      </p>
+    
+                    </div>
+    
+                  </div>
+                </li>
+    
+                <li>
+                  <div class="menu-card hover:card">
+    
+                    <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                      <img src="/Images2/snacks/HoneyChilliPotato.jpeg" width="100" height="100" loading="lazy" alt="Honey Chilli Potato"
+                        class="img-cover" style="border-radius:20px;">
+                    </figure>
+    
+                    <div>
+    
+                      <div class="title-wrapper">
+                        <h3 class="title-3">
+                          <a href="#" class="card-title" onclick="addToCart('Honey Chilli Potato', 180)">Honey Chilli Potato</a>
+                        </h3>
+    
+                        <span class="span title-2">Rs. 180</span>
+                      </div>
+    
+                      <p class="card-text label-1">
+                        Crispy potato wedges coated in a sweet and spicy glaze, creating a mouthwatering fusion of flavors!
+                      </p>
+    
+                    </div>
+    
+                  </div>
+                </li>    
+              </ul>
+            </div>
+              <!-- </div> -->
+            </div>
+
+
+
+
+
+
+            <!-- MAIN COURSE SECTION -->
+
+
+
+            <div class="ccontainer" id="maincourse">
+
+
+
+                <p class="Top" style="font-weight:500; font-size:2.5em;">MAIN COURSE</p>   
+        
+            
+               
+        
+        
+                <div class="Combined">
+        
+        
+                    <!-- <div class="breakfast"> -->
+                        <!-- <p class="Top" style="font-weight:500; font-size:2.5em;">DELICIOUS MENU</p> -->
+        
+                  <div class="div-1">
+                  <ul class="grid-list">
+        
+                    <li>
+                      <div class="menu-card hover:card">
+        
+                        <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                          <img src="/Images2/Maincourse/DalMakhni.jpeg" width="100" height="100" loading="lazy" alt="Dal Makhni"
+                            class="img-cover" style="border-radius:20px;">
+                        </figure>
+        
+                        <div>
+        
+                          <div class="title-wrapper">
+                            <h3 class="title-3">
+                              <a href="#" class="card-title" onclick="addToCart('Dal Makhni', 220)">Dal Makhni</a>
+                            </h3>
+        
+                            <!-- <span class="badge label-1">Seasonal</span> -->
+        
+                            <span class="span title-2">Rs. 220</span>
+                          </div>
+        
+                          <p class="card-text label-1">
+                            A warm hug for your taste buds that'll leave you craving more!
+                          </p>
+        
+                        </div>
+        
+                      </div>
+                    </li>
+        
+                    <li>
+                      <div class="menu-card hover:card">
+        
+                        <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                          <img src="/Images2/Maincourse/PaneerButterMasala.jpeg" width="100" height="100" loading="lazy" alt="Paneer Butter Masala"
+                            class="img-cover" style="border-radius:20px;">
+                        </figure>
+        
+                        <div>
+        
+                          <div class="title-wrapper">
+                            <h3 class="title-3">
+                              <a href="#" class="card-title" onclick="addToCart('Paneer Butter Masala', 270)">Paneer Butter Masala</a>
+                            </h3>
+        
+                            <span class="span title-2">Rs. 270</span>
+                          </div>
+        
+                          <p class="card-text label-1">
+                            A delectable dance of flavors that'll have you coming back for more!
+                          </p>
+        
+                        </div>
+        
+                      </div>
+                    </li>
+        
+                    <li>
+                      <div class="menu-card hover:card">
+                        <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                          <img src="/Images2/Maincourse/MalaiKofta.jpeg" width="100" height="100" loading="lazy" alt="Malai Kofta"
+                            class="img-cover" style="border-radius:20px;">
+                        </figure>
+                    
+                        <div>
+                          <div class="title-wrapper">
+                            <h3 class="title-3">
+                                <a href="#" class="card-title" onclick="addToCart('Malai Kofta', 210)">Malai Kofta</a>                              
+                            </h3>
+                            <span class="span title-2">Rs. 210</span>
+                          </div>
+                          <p class="card-text label-1">
+                            A symphony of flavors that'll transport you to foodie paradise!
+                          </p>
+                          <!-- <button class="add-to-cart-btn" onclick="addToCart('Malai Kofta', 350)">Add to Cart</button> -->
+                        </div>
+                      </div>
+                    </li>
+                    </ul>
+                    </div>
+        
+        
+                    <div class="div-2">
+                    <ul class="grid-list">
+        
+                    <li>
+                      <div class="menu-card hover:card">
+        
+                        <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                          <img src="/Images2/Maincourse/Rajmachawal.jpeg" width="100" height="100" loading="lazy" alt="Rajma Chawal"
+                            class="img-cover" style="border-radius:20px;">
+                        </figure>
+        
+                        <div>
+        
+                          <div class="title-wrapper">
+                            <h3 class="title-3">
+                              <a href="#" class="card-title" onclick="addToCart('Rajma Chawal', 230)">Rajma Chawal</a>
+                            </h3>
+        
+                            <span class="badge label-1">New</span>
+        
+                            <span class="span title-2">Rs. 230</span>
+                          </div>
+        
+                          <p class="card-text label-1">
+                            A comforting classic that'll warm your soul with every bite!
+                          </p>
+        
+                        </div>
+        
+                      </div>
+                    </li>
+        
+                    <li>
+                      <div class="menu-card hover:card">
+        
+                        <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                          <img src="/Images2/Maincourse/VegBiryani.jpg" width="100" height="100" loading="lazy" alt="Veg Biryani"
+                            class="img-cover" style="border-radius:20px;">
+                        </figure>
+        
+                        <div>
+        
+                          <div class="title-wrapper">
+                            <h3 class="title-3">
+                              <a href="#" class="card-title" onclick="addToCart('Paneer Tikka', 180)">Veg Biryani</a>
+                            </h3>
+        
+                            <span class="span title-2">Rs. 180</span>
+                          </div>
+        
+                          <p class="card-text label-1">
+                            A wholesome and flavorful meal that'll leave you feeling satisfied and ready to take on the day!
+                          </p>
+        
+                        </div>
+        
+                      </div>
+                    </li>
+        
+                    <li>
+                      <div class="menu-card hover:card">
+        
+                        <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                          <img src="/Images2/Maincourse/KadhaiPaneer.jpeg" width="100" height="100" loading="lazy" alt="Kadhai Paneer"
+                            class="img-cover" style="border-radius:20px;">
+                        </figure>
+        
+                        <div>
+        
+                          <div class="title-wrapper">
+                            <h3 class="title-3">
+                              <a href="#" class="card-title" onclick="addToCart('Kadhai Paneer', 280)">Kadhai Paneer</a>
+                            </h3>
+        
+                            <span class="span title-2">Rs. 280</span>
+                          </div>
+        
+                          <p class="card-text label-1">
+                            A culinary masterpiece that'll leave you wanting an encore!
+                          </p>
+        
+                        </div>
+        
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                  <!-- </div> -->
+                </div>   
+            </div>
+      </section>
+
+      <div id="invoiceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Invoice</h2>
+            <div id="invoiceContent"></div>
+
+            <div id="paymentBox" style="display:none; margin-top:20px; text-align:center; border-top:1px solid #444; padding-top:20px;">
+    <h3>Scan to Pay</h3>
+    <img id="qrImage" src="" width="220" height="220" style="border:1px solid #ccc; padding:10px;">
+    <br><br>
+    <button onclick="openUPIPayment()" style="padding:10px 20px; font-size:18px; cursor:pointer; background:#ff914d; color:white; border:none; border-radius:5px;">
+        Pay Now
+    </button>
+</div>
+
+        </div>
+    </div>
+
+      <script>
+        // JavaScript to handle Add to Cart functionality
+
+        // Initialize an empty cart array
+        let cart = [];
+
+        // Function to add an item to the cart
+        function addToCart(itemName, itemPrice) {
+            // Create an item object
+            const item = {
+                name: itemName,
+                price: itemPrice
+            };
+
+            // Add the item to the cart array
+            cart.push(item);
+
+            // Display a message to the user (optional)
+            alert(itemName + ' has been added to your cart!');
+
+            // Update the cart display
+            updateCartDisplay();
+        }
+
+        // Function to update the cart display
+        function updateCartDisplay() {
+            // Update the cart count badge
+            const cartCountElement = document.getElementById('cart-count');
+            cartCountElement.textContent = cart.length;
+        }
+
+        // Function to show the invoice modal
+        function showInvoice() {
+    const modal = document.getElementById('invoiceModal');
+    modal.style.display = "block";
+
+    // Generate the invoice content
+    let invoiceContent = '<table style="width:100%; border-collapse: collapse; margin-top:10px;">';
+invoiceContent += '<tr><th style="border:1px solid #000; padding:8px;">Item Name</th><th style="border:1px solid #000; padding:8px;">Price</th></tr>';
+
+let total = 0;
+cart.forEach(item => {
+    invoiceContent += `<tr><td style="border:1px solid #000; padding:8px;">${item.name}</td><td style="border:1px solid #000; padding:8px;">${item.price} Rs.</td></tr>`;
+    total += item.price;
+});
+
+invoiceContent += `<tr><td style="border:1px solid #000; padding:8px;"><strong>Total</strong></td><td style="border:1px solid #000; padding:8px;"><strong>${total} Rs.</strong></td></tr>`;
+invoiceContent += '</table>';
+
+
+    document.getElementById('invoiceContent').innerHTML = invoiceContent;
+
+    // ✅ Generate QR Code if total > 0
+    if(total > 0) {
+        generateQRCode(total);
+    }
+}
+
+
+function generateQRCode(amount) {
+    let merchantUPI = "8708013042@ptaxis"; // Your personal Paytm UPI ID
+    let upiLink = `upi://pay?pa=${merchantUPI}&pn=Your Name&am=${amount}&cu=INR`;
+    let qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiLink)}`;
+    document.getElementById("qrImage").src = qrURL;
+    document.getElementById("paymentBox").style.display = "block";
+}
+
+function openUPIPayment() {
+    let totalText = cart.reduce((sum, item) => sum + item.price, 0);
+    let merchantUPI = "abcd@paytm"; // Your personal Paytm UPI ID
+    let upiURL = `upi://pay?pa=${merchantUPI}&pn=Your Name&am=${totalText}&cu=INR`;
+    window.location.href = upiURL;
+}
+
+
+
+
+        // Function to close the modal
+        function closeModal() {
+            const modal = document.getElementById('invoiceModal');
+            modal.style.display = "none";
+        }
+
+        // Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('invoiceModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // For debugging purposes, you can log the cart to the console
+        console.log('Cart:', cart);
+    </script>
+
+
+
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

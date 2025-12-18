@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="RestaurantTableBooking.css">
+    <title>Restaurant Table Booking</title>
+</head>
+
+<body>
+
+<header class="header" data-header>
+    <div class="container">
+        <a href="#" class="logo">
+            <img src="/Images2/logo.png" height="1000" width="170" alt="Restaurant-logo">
+        </a>
+
+        <!-- Bag Icon for Invoice -->
+        <a href="#" onclick="showInvoice()">
+            <ion-icon class="bagicon" name="bag-check-outline"></ion-icon>
+        </a>
+    </div>
+</header>
+
+<br><br><br>
+
+<!-- INVOICE SECTION --->
+<section id="invoice" style="
+    display:none;
+    padding:20px;
+    max-height:80vh;
+    overflow-y:auto;
+">
+
+
+    <div class="container">
+        <h2 style="display:flex; justify-content:space-between; align-items:center;"></h2>
+
+        <h2>Billing Invoice
+             <span style="cursor:pointer; font-size:22px;" onclick="closeInvoice()">✖</span>
+
+        </h2>
+
+        <table id="invoiceTable">
+            <thead>
+                <tr><th>Item</th><th>Price</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <p id="totalPrice" style="font-size:20px; font-weight:bold;"></p>
+
+        <!-- QR Code Box -->
+        <div id="paymentBox" style="
+    display:none;
+    margin-top:30px;
+    text-align:center;
+    border-top:1px solid #444;
+    padding-top:20px;
+">
+
+
+
+
+
+            <h3>Scan to Pay</h3>
+            <img id="qrImage" src="" width="220" height="220" style="border:1px solid #ccc; padding:10px;">
+            <br><br>
+
+            <button onclick="openUPIPayment()" 
+            style="padding:10px 20px; font-size:18px; cursor:pointer; background:#ff914d; color:white; border:none; border-radius:5px;">
+                Pay Now
+            </button>
+        </div>
+
+    </div>
+</section>
+
+<!-- ICONS -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script>
+/* ---------------- CART SYSTEM ---------------- */
+let cart = [];
+
+// Add items (You will call this from your menu buttons)
+function addToCart(itemName, itemPrice) {
+    cart.push({ name: itemName, price: itemPrice });
+    alert(itemName + " added to cart!");
+}
+
+/* -------------- SHOW INVOICE + PAYMENT QR ------------- */
+function showInvoice() {
+    const invoiceSection = document.getElementById("invoice");
+    const invoiceTableBody = document.querySelector("#invoiceTable tbody");
+
+    invoiceTableBody.innerHTML = "";
+    let total = 0;
+
+    // Add cart items to invoice
+    cart.forEach(item => {
+        invoiceTableBody.innerHTML += `
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.price} Rs</td>
+            </tr>
+        `;
+        total += item.price;
+    });
+
+    // Show total price
+    document.getElementById("totalPrice").textContent = "Total: " + total + " Rs";
+
+    // Show invoice section
+    invoiceSection.style.display = "block";
+
+    // Generate QR Code for payment
+    generateQRCode(total);
+}
+
+/* ---------------- GENERATE QR CODE ---------------- */
+function generateQRCode(amount) {
+
+    if (amount <= 0) {
+        alert("Please add items to cart");
+        return;
+    }
+
+    // DEMO UPI (safe for project)
+    let merchantUPI = "test@upi";
+
+    // UPI payment link
+    let upiLink =
+        `upi://pay?pa=${merchantUPI}&pn=Restaurant&am=${amount}&cu=INR`;
+
+    // QR generator API
+    let qrURL =
+        `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiLink)}`;
+
+    // SET QR IMAGE
+    document.getElementById("qrImage").src = qrURL;
+
+    // SHOW PAYMENT BOX
+    document.getElementById("paymentBox").style.display = "block";
+}
+
+
+
+/* ---------------- OPEN PAYMENT APP ---------------- */
+function openUPIPayment() {
+    let amount = document.getElementById("totalPrice").textContent.replace("Total: ", "").replace(" Rs", "");
+    let merchantUPI = "test@upi";
+
+    let upiURL =
+        `upi://pay?pa=${merchantUPI}&pn=Restaurant&am=${amount}&cu=INR`;
+
+    window.location.href = upiURL; // Opens Google Pay / PhonePe / Paytm
+}
+
+
+function closeInvoice() {
+    document.getElementById("invoice").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>
+
